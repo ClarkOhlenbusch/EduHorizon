@@ -19,10 +19,29 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
     // In a real implementation, this would navigate to the course page
   };
 
+  // Get a lighter pastel version of the course color for the background
+  const getBackgroundColor = (color: string) => {
+    // For common colors, use predefined pastel colors
+    const pastelColors: {[key: string]: string} = {
+      '#e63946': '#f5d6d9', // Red
+      '#2a9d8f': '#d8f1ed', // Teal
+      '#457b9d': '#d9e8f3', // Blue
+      '#f4a261': '#fdecd6', // Orange
+      '#6a994e': '#e2f0d9', // Green
+      '#8338ec': '#e8d9fb', // Purple
+      '#ffb703': '#fff3d8', // Yellow
+    };
+    
+    return pastelColors[color] || '#f5f5f5'; // Default to light gray if color not found
+  };
+
   return (
     <div 
-      className="bg-white rounded-md shadow-sm border border-neutral-200 transition-all duration-200 p-4 group hover:shadow-md cursor-pointer"
-      style={{ borderLeft: `4px solid ${course.color}` }}
+      className="rounded-md shadow-sm transition-all duration-200 p-4 group hover:shadow-md cursor-pointer"
+      style={{ 
+        backgroundColor: getBackgroundColor(course.color),
+        borderLeft: `4px solid ${course.color}` 
+      }}
       onClick={handleCourseClick}
     >
       <div className="flex items-center justify-between mb-2">
