@@ -1,17 +1,20 @@
 import React, { ReactNode } from 'react';
 import Sidebar from '@/components/Sidebar';
 import Header from '@/components/Header';
+import { CourseData } from '@/lib/types';
 
 interface MainLayoutProps {
   children: ReactNode;
   activeSection: string;
   setActiveSection: (section: string) => void;
+  onSelectCourse?: (course: CourseData) => void;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ 
   children, 
   activeSection, 
-  setActiveSection 
+  setActiveSection,
+  onSelectCourse 
 }) => {
   return (
     <div className="flex h-screen overflow-hidden bg-neutral-50 text-neutral-800">

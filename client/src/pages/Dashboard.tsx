@@ -7,7 +7,11 @@ import CourseCard from '@/components/CourseCard';
 import ToDoItem from '@/components/ToDoItem';
 import UpcomingItem from '@/components/UpcomingItem';
 
-const Dashboard: React.FC = () => {
+interface DashboardProps {
+  onSelectCourse?: (course: CourseData) => void;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ onSelectCourse }) => {
   const [courses, setCourses] = useState<CourseData[]>([]);
   const [todoItems, setTodoItems] = useState<TodoItemData[]>([]);
   const [loadingCourses, setLoadingCourses] = useState(true);
@@ -58,7 +62,13 @@ const Dashboard: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {courses.map(course => (
-              <CourseCard key={course.id} course={course} />
+              <div 
+                key={course.id} 
+                onClick={() => onSelectCourse && onSelectCourse(course)}
+                className="cursor-pointer hover:transform hover:scale-[1.02] transition-transform"
+              >
+                <CourseCard course={course} />
+              </div>
             ))}
           </div>
         )}

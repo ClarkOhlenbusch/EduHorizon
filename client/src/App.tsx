@@ -11,10 +11,13 @@ import Announcements from "./pages/Announcements";
 import Assignments from "./pages/Assignments";
 import Quizzes from "./pages/Quizzes";
 import Grades from "./pages/Grades";
+import CourseHome from "./pages/CourseHome";
 import { useToast } from "@/hooks/use-toast";
+import { CourseData } from "@/lib/types";
 
 function App() {
   const [activeSection, setActiveSection] = useState<string>("dashboard");
+  const [selectedCourse, setSelectedCourse] = useState<CourseData | null>(null);
   const { toast } = useToast();
 
   // Calendar page handling
@@ -35,25 +38,40 @@ function App() {
     );
   };
 
+  const handleNavigateBack = () => {
+    setSelectedCourse(null);
+    setActiveSection("dashboard");
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
-      <MainLayout activeSection={activeSection} setActiveSection={setActiveSection}>
+      <MainLayout 
+        activeSection={activeSection} 
+        setActiveSection={setActiveSection}
+        onSelectCourse={setSelectedCourse}
+      >
         <Switch>
           <Route path="/">
-            {activeSection === "dashboard" && <Dashboard />}
-            {activeSection === "courses" && <CourseModules />}
-            {activeSection === "announcements" && <Announcements />}
-            {activeSection === "assignments" && <Assignments />}
-            {activeSection === "quizzes" && <Quizzes />}
-            {activeSection === "grades" && <Grades />}
-            {activeSection === "calendar" && handleCalendarPage()}
-            {activeSection !== "dashboard" && 
-             activeSection !== "courses" && 
-             activeSection !== "announcements" && 
-             activeSection !== "assignments" && 
-             activeSection !== "quizzes" && 
-             activeSection !== "grades" && 
-             activeSection !== "calendar" && <NotFound />}
+            {selectedCourse ? (
+              <CourseHome course={selectedCourse} onNavigateBack={handleNavigateBack} />
+            ) : (
+              <>
+                {activeSection === "dashboard" && <Dashboard onSelectCourse={setSelectedCourse} />}
+                {activeSection === "courses" && <CourseModules />}
+                {activeSection === "announcements" && <Announcements />}
+                {activeSection === "assignments" && <Assignments />}
+                {activeSection === "quizzes" && <Quizzes />}
+                {activeSection === "grades" && <Grades />}
+                {activeSection === "calendar" && handleCalendarPage()}
+                {activeSection !== "dashboard" && 
+                activeSection !== "courses" && 
+                activeSection !== "announcements" && 
+                activeSection !== "assignments" && 
+                activeSection !== "quizzes" && 
+                activeSection !== "grades" && 
+                activeSection !== "calendar" && <NotFound />}
+              </>
+            )}
           </Route>
           <Route component={NotFound} />
         </Switch>
