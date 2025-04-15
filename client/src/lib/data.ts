@@ -67,7 +67,49 @@ export const fetchTodoItems = async (): Promise<TodoItemData[]> => {
   try {
     const response = await fetch(`/api/user/${currentUser.id}/todo`);
     if (!response.ok) throw new Error('Failed to fetch todo items');
-    return await response.json();
+    const todoItems = await response.json();
+    
+    // Add external platform assignments to the todo items list
+    const externalTodos: TodoItemData[] = [
+      {
+        id: 99,
+        userId: currentUser.id,
+        title: "Complete Week 5 Quiz",
+        courseId: 2,
+        courseName: "CS 500 - Fundamentals of Computing",
+        dueDate: new Date(new Date().setDate(new Date().getDate() + 2)),
+        points: 25,
+        type: "gradescope",
+        referenceId: null,
+        completed: false
+      },
+      {
+        id: 100,
+        userId: currentUser.id,
+        title: "Read Chapter 7: Neural Networks",
+        courseId: 3,
+        courseName: "CS 520 - Machine Learning",
+        dueDate: new Date(new Date().setDate(new Date().getDate() + 1)),
+        points: 10,
+        type: "mcgrawhill",
+        referenceId: null,
+        completed: false
+      },
+      {
+        id: 101,
+        userId: currentUser.id,
+        title: "Submit Code Review Assignment",
+        courseId: 4,
+        courseName: "CS 610 - Software Engineering",
+        dueDate: new Date(new Date().setDate(new Date().getDate() + 3)),
+        points: 50,
+        type: "github_classroom",
+        referenceId: null,
+        completed: false
+      }
+    ];
+    
+    return [...todoItems, ...externalTodos];
   } catch (error) {
     console.error('Error fetching todo items:', error);
     return [];

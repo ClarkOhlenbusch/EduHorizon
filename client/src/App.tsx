@@ -11,9 +11,29 @@ import Announcements from "./pages/Announcements";
 import Assignments from "./pages/Assignments";
 import Quizzes from "./pages/Quizzes";
 import Grades from "./pages/Grades";
+import { useToast } from "@/hooks/use-toast";
 
 function App() {
   const [activeSection, setActiveSection] = useState<string>("dashboard");
+  const { toast } = useToast();
+
+  // Calendar page handling
+  const handleCalendarPage = () => {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center bg-white rounded-lg border border-neutral-200 p-6">
+        <h2 className="text-xl font-semibold mb-4">Calendar</h2>
+        <p className="text-neutral-600 mb-6">Your academic schedule and events calendar.</p>
+        <img 
+          src="https://cdn.dribbble.com/users/1192538/screenshots/6887260/calendar_app_4x.png" 
+          alt="Calendar Interface" 
+          className="w-full max-w-2xl rounded-lg shadow-md mb-6" 
+        />
+        <p className="text-neutral-500 text-center">
+          The calendar view would display all your assignments, quizzes, and class schedules in a user-friendly interface.
+        </p>
+      </div>
+    );
+  };
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -26,12 +46,14 @@ function App() {
             {activeSection === "assignments" && <Assignments />}
             {activeSection === "quizzes" && <Quizzes />}
             {activeSection === "grades" && <Grades />}
+            {activeSection === "calendar" && handleCalendarPage()}
             {activeSection !== "dashboard" && 
              activeSection !== "courses" && 
              activeSection !== "announcements" && 
              activeSection !== "assignments" && 
              activeSection !== "quizzes" && 
-             activeSection !== "grades" && <NotFound />}
+             activeSection !== "grades" && 
+             activeSection !== "calendar" && <NotFound />}
           </Route>
           <Route component={NotFound} />
         </Switch>
