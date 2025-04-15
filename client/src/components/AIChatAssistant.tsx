@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MessageCircle, X, Send, ChevronDown, ChevronUp } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { getGeminiResponse, getFallbackResponse } from '@/lib/gemini';
 
 interface Message {
   id: string;
@@ -52,46 +53,45 @@ const AIChatAssistant: React.FC = () => {
     setIsLoading(true);
     
     try {
-      // In a real implementation, this would be an API call to Gemini
-      // For prototype purposes, we'll simulate a response
-      
       // Check if we have the Gemini API key
-      const hasApiKey = true; // Simulated; in real code we'd check environment variables
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      let responseContent = '';
       
-      if (!hasApiKey) {
+      if (!apiKey) {
         toast({
           title: "Missing API Key",
           description: "Gemini API key is required for the AI assistant to work.",
           variant: "destructive"
         });
         
-        // Add error message to chat
-        const errorMessage: Message = {
-          id: generateUniqueId(),
-          role: 'assistant',
-          content: "I'm unable to respond right now due to missing API credentials. Please contact your administrator.",
-          timestamp: new Date()
-        };
-        
-        setMessages(prevMessages => [...prevMessages, errorMessage]);
-        setIsLoading(false);
-        return;
+        // Use fallback response if API key is missing
+        responseContent = getFallbackResponse(userMessage.content);
+      } else {
+        try {
+          // Try to get a response from the Gemini API
+          responseContent = await getGeminiResponse(userMessage.content);
+        } catch (apiError) {
+          console.error('Gemini API error:', apiError);
+          // Fall back to local response generation if API fails
+          responseContent = getFallbackResponse(userMessage.content);
+          
+          toast({
+            title: "API Connection Issue",
+            description: "Using local AI capabilities due to connection issues.",
+            variant: "default"
+          });
+        }
       }
       
-      // Simulate API delay
-      setTimeout(() => {
-        const responseContent = generateSimulatedResponse(userMessage.content);
-        
-        const assistantMessage: Message = {
-          id: generateUniqueId(),
-          role: 'assistant',
-          content: responseContent,
-          timestamp: new Date()
-        };
-        
-        setMessages(prevMessages => [...prevMessages, assistantMessage]);
-        setIsLoading(false);
-      }, 1500);
+      const assistantMessage: Message = {
+        id: generateUniqueId(),
+        role: 'assistant',
+        content: responseContent,
+        timestamp: new Date()
+      };
+      
+      setMessages(prevMessages => [...prevMessages, assistantMessage]);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error with AI assistant:', error);
       
@@ -105,33 +105,6 @@ const AIChatAssistant: React.FC = () => {
       setMessages(prevMessages => [...prevMessages, errorMessage]);
       setIsLoading(false);
     }
-  };
-  
-  // Simulate AI responses for the prototype
-  const generateSimulatedResponse = (userInput: string): string => {
-    const userInputLower = userInput.toLowerCase();
-    
-    if (userInputLower.includes('deadline') || userInputLower.includes('due date') || userInputLower.includes('when is')) {
-      return "I can see you have an assignment due on April 20, 2025 for your UI Design class. There's also a quiz in Data Structures due on April 22.";
-    }
-    
-    if (userInputLower.includes('grade') || userInputLower.includes('score') || userInputLower.includes('marks')) {
-      return "Your current grades are: UI Design: 92%, Data Structures: 87%, Machine Learning: 90%. Your overall GPA is 3.8.";
-    }
-    
-    if (userInputLower.includes('class') || userInputLower.includes('course') || userInputLower.includes('lecture')) {
-      return "Your next class is UI Design at 2:00 PM today in Room 101. You have Data Structures tomorrow at 10:00 AM.";
-    }
-    
-    if (userInputLower.includes('assignment') || userInputLower.includes('homework') || userInputLower.includes('project')) {
-      return "You have a Project Proposal due on April 20 and a Wireframe Assignment due on April 25. Would you like me to help you prioritize your work?";
-    }
-    
-    if (userInputLower.includes('help') || userInputLower.includes('assist') || userInputLower.includes('support')) {
-      return "I can help you with course information, assignment deadlines, grade tracking, and schedule management. Just let me know what you need!";
-    }
-    
-    return "I understand you're asking about \"" + userInput + "\". Could you provide more details or specify what kind of information you're looking for regarding your courses?";
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
