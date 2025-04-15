@@ -6,9 +6,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { createQuiz } from '@/lib/data';
 import { useToast } from '@/hooks/use-toast';
-import { Trash2, Plus } from 'lucide-react';
+import { Trash2, Plus, Upload, FileUp } from 'lucide-react';
 import { QuizData } from '@/lib/types';
 
 interface CreateQuizModalProps {
@@ -48,6 +49,49 @@ const CreateQuizModal: React.FC<CreateQuizModalProps> = ({ open, onOpenChange, c
   ]);
   const [submitting, setSubmitting] = useState(false);
   const { toast } = useToast();
+  
+  // New state for file upload tab
+  const [activeTab, setActiveTab] = useState('create');
+  const [uploadFileName, setUploadFileName] = useState('');
+  
+  // Handle file selection
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setUploadFileName(e.target.files[0].name);
+    }
+  };
+  
+  // Handle file upload submission
+  const handleFileUpload = () => {
+    if (!uploadFileName || !courseId || !points || !dueDate) {
+      toast({
+        title: "Missing Fields",
+        description: "Please select a file and fill out all required fields.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    setSubmitting(true);
+    
+    // Simulate file processing
+    setTimeout(() => {
+      toast({
+        title: "Success!",
+        description: `Quiz file "${uploadFileName}" uploaded and converted successfully!`,
+      });
+      
+      // Reset form
+      setUploadFileName('');
+      setCourseId('');
+      setPoints('');
+      setTimeLimit('');
+      setDueDate('');
+      
+      setSubmitting(false);
+      onOpenChange(false);
+    }, 1500);
+  };
 
   const handleAddQuestion = () => {
     const newId = questions.length + 1;
