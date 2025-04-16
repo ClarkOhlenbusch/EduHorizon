@@ -10,7 +10,7 @@ EDU Horizon is a modern, responsive learning management system inspired by Canva
 - **Course Management**: Easily navigate between courses and their content
 - **Assignment & Quiz System**: Create, submit, and grade assignments and quizzes
 - **Module Organization**: Organize course content into logical modules
-- **Help Assistant**: Get assistance with course content using the built-in help assistant
+- **AI-Powered Assistant**: Get help with course content using the built-in Gemini-powered assistant
 - **Announcements**: Stay updated with course announcements
 - **Grade Tracking**: View and manage grades for all assessments
 
@@ -20,6 +20,7 @@ EDU Horizon is a modern, responsive learning management system inspired by Canva
 - **Backend**: Express.js, Node.js
 - **State Management**: React Query
 - **Routing**: Wouter
+- **AI Integration**: Google Gemini API
 - **Form Handling**: React Hook Form
 - **Validation**: Zod
 
@@ -37,38 +38,7 @@ Visit the application on Replit: [EDU Horizon Demo](https://eduhorizon.yourusern
 
 ### Installation for Windows
 
-EDU Horizon includes Windows batch files to make installation and setup easy. Follow these simple steps:
-
-#### Quick Setup (Recommended)
-
-1. **Clone the repository**
-   ```
-   git clone https://github.com/yourusername/edu-horizon.git
-   cd edu-horizon
-   ```
-
-2. **Run the Windows setup script**
-   ```
-   setup-windows.bat
-   ```
-   This script will:
-   - Check for Node.js and npm
-   - Install all project dependencies
-   - Install cross-env for Windows compatibility
-   - Create a default .env file
-
-3. **Start the application**
-   ```
-   start-windows.bat
-   ```
-   
-4. **Access the application**
-   
-   Open your browser and go to [http://localhost:5000](http://localhost:5000)
-
-#### Manual Setup (Alternative)
-
-If you prefer to set up manually:
+Follow these steps to set up EDU Horizon on a Windows machine:
 
 1. **Clone the repository**
    ```
@@ -86,21 +56,40 @@ If you prefer to set up manually:
    npm install cross-env --save-dev
    ```
 
-4. **Create environment variables file**
+4. **Modify package.json for Windows compatibility**
+   
+   Edit the `scripts` section in `package.json` to use cross-env:
+   ```json
+   "scripts": {
+     "dev": "cross-env NODE_ENV=development tsx server/index.ts",
+     "dev:windows": "cross-env NODE_ENV=development tsx server/index.ts",
+     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+     "start": "cross-env NODE_ENV=production node dist/index.js",
+     "check": "tsc",
+     "db:push": "drizzle-kit push"
+   }
+   ```
+
+5. **Create environment variables file**
    
    Create a `.env` file in the root directory:
    ```
-   # EDU Horizon Environment Variables
+   VITE_GEMINI_API_KEY=your_gemini_api_key_here
    ```
    
-   Note: The application doesn't require any environment variables to run.
+   Note: If you don't have a Gemini API key, the application will still work, but the AI assistant will use fallback responses.
 
-5. **Start the development server**
+6. **Start the development server**
+   ```
+   npm run dev
+   ```
+
+   If you still encounter issues, try:
    ```
    npx cross-env NODE_ENV=development tsx server/index.ts
    ```
 
-6. **Access the application**
+7. **Access the application**
    
    Open your browser and go to [http://localhost:5000](http://localhost:5000)
 
@@ -140,7 +129,7 @@ If you prefer to set up manually:
 
 ## Environment Variables
 
-This application doesn't require any specific environment variables to run.
+- `VITE_GEMINI_API_KEY` - Google Gemini API key for AI assistant functionality
 
 ## Building for Production
 

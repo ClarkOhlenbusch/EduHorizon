@@ -1,0 +1,75 @@
+EDU Horizon – A Canvas-Inspired Course Management System
+Project Overview:
+EDU Horizon is a low-fidelity, interactive web application inspired by Canvas. This project is a simulated course management system where every button, link, or interactive element provides a noticeable response—even if only via placeholder actions. The goal is to create a prototype that feels real by making sure each feature “does something” when clicked.
+
+General Requirements:
+
+Single-Page Application (SPA) Approach:
+Rather than creating multiple, separate HTML pages, use dynamic content updating (via JavaScript) or modals to simulate navigation between sections. This keeps the codebase efficient and makes it easier to simulate a cohesive user experience.
+
+Responsive Design:
+The design should be clean and minimal yet inspired by Canvas’s intuitive and modern interface. Use CSS (or a CSS framework if desired) to create a layout with a consistent header, sidebar, and main content area.
+
+Interactivity:
+Every button, link, and form must provide feedback (whether that’s a modal popup, an alert, or a dynamic content switch). Even if the functionality is simulated (e.g., “saving” a quiz or “posting” grades), there should be visual confirmation to the user.
+
+Core Features and Flows:
+
+Navigating Course Materials
+
+Objective: Allow users to easily browse and view course content.
+
+Details:
+
+A sidebar with links (e.g., Dashboard, Course Materials, Announcements, Assignments, Quizzes, Grades, etc.).
+
+The “Course Materials” section should display a list or grid of module items (e.g., lectures, slides, documents).
+
+Clicking on a module expands additional details or opens a modal with more information.
+
+Managing Assignments
+
+Objective: Provide functionality for students/instructors to view and manage assignments.
+
+Details:
+
+A dedicated “Assignments” section that lists available assignments (with due dates, statuses, etc.).
+
+Action buttons (e.g., “Submit Assignment,” “View Details,” “Edit Assignment”) that trigger a visible response.
+
+For example, clicking “Submit Assignment” could open a form (or modal) where a file can be “uploaded” (this can be simulated without backend storage).
+
+Creating Quizzes
+
+Objective: Enable instructors to create new quizzes with an interactive form.
+
+Details:
+
+A “Create Quiz” button should be prominent in the Quizzes section.
+
+When clicked, a form or modal should appear for entering quiz details: Title, Questions, Options, and Correct Answers.
+
+Upon form submission, simulate a “quiz created” state by clearing the form and providing a confirmation message (e.g., “Quiz Created Successfully!”).
+
+Posting Pen-and-Paper Quiz/Test Grades
+
+Objective: Simulate the process of entering and posting grades.
+
+Details:
+
+A “Grades” section that allows instructors to click a button (e.g., “Post Grades”) to open a grade entry interface.
+
+This interface should allow selection/input of a quiz/test, entering grade data (for instance, via input fields or a table), and then “submitting” these grades.
+
+The system should provide visual feedback confirming that the grades have been “posted.”
+
+Additional Guidance:
+
+Interactivity is Key:
+Even though this is a low-fidelity project, each button or interactive element must have an event listener that performs some action, whether it’s updating the DOM, showing an alert, or displaying a modal.
+
+JavaScript Usage:
+Use plain JavaScript or any lightweight framework you’re comfortable with to handle dynamic content updates. Make sure that every click or form submission results in a visible change.
+
+Styling:
+Aim for a clean, minimalist aesthetic inspired by Canvas. Use a consistent color scheme, and ensure that navigation is clear and intuitive.
