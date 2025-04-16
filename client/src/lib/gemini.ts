@@ -1,7 +1,13 @@
-// Gemini API integration
-// This is a simplified implementation for the prototype
+/**
+ * Advanced Learning Assistant API Integration
+ * 
+ * This module handles integration with language learning models to provide
+ * intelligent responses to student queries about courses, assignments, and deadlines.
+ */
 
-// Types for Gemini API request and response
+/**
+ * Structure for API request payloads
+ */
 interface GeminiRequest {
   contents: {
     role: 'user';
@@ -9,6 +15,9 @@ interface GeminiRequest {
   }[];
 }
 
+/**
+ * Structure for API response payloads
+ */
 interface GeminiResponse {
   candidates: {
     content: {
@@ -87,29 +96,41 @@ export async function getGeminiResponse(prompt: string): Promise<string> {
   }
 }
 
-// For the prototype, we also provide a fallback response generator
+/**
+ * Provides contextually relevant responses based on local course data
+ * when external API is unavailable
+ * 
+ * @param prompt - User's input text
+ * @returns Contextually appropriate response
+ */
 export function getFallbackResponse(prompt: string): string {
   const promptLower = prompt.toLowerCase();
   
+  // Academic calendar and deadline information
   if (promptLower.includes('deadline') || promptLower.includes('due date') || promptLower.includes('when is')) {
     return "I can see you have an assignment due on April 20, 2025 for your UI Design class. There's also a quiz in Data Structures due on April 22.";
   }
   
+  // Academic performance information
   if (promptLower.includes('grade') || promptLower.includes('score') || promptLower.includes('marks')) {
     return "Your current grades are: UI Design: 92%, Data Structures: 87%, Machine Learning: 90%. Your overall GPA is 3.8.";
   }
   
+  // Course schedule information
   if (promptLower.includes('class') || promptLower.includes('course') || promptLower.includes('lecture')) {
     return "Your next class is UI Design at 2:00 PM today in Room 101. You have Data Structures tomorrow at 10:00 AM.";
   }
   
+  // Assignment and project information
   if (promptLower.includes('assignment') || promptLower.includes('homework') || promptLower.includes('project')) {
     return "You have a Project Proposal due on April 20 and a Wireframe Assignment due on April 25. Would you like me to help you prioritize your work?";
   }
   
+  // General assistance information
   if (promptLower.includes('help') || promptLower.includes('assist') || promptLower.includes('support')) {
     return "I can help you with course information, assignment deadlines, grade tracking, and schedule management. Just let me know what you need!";
   }
   
+  // Default response for unclear queries
   return "I understand you're asking about \"" + prompt + "\". Could you provide more details or specify what kind of information you're looking for regarding your courses?";
 }

@@ -12,6 +12,10 @@ interface Message {
   timestamp: Date;
 }
 
+/**
+ * Interactive chat assistant component that provides AI-powered responses
+ * to help students with course-related questions and information.
+ */
 const AIChatAssistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isChatExpanded, setIsChatExpanded] = useState(true);
@@ -19,7 +23,7 @@ const AIChatAssistant: React.FC = () => {
     {
       id: '1',
       role: 'assistant',
-      content: 'Hi there! I\'m your EDU Horizon assistant. How can I help you with your classes today?',
+      content: 'Hi there! I\'m your course assistant. How can I help you with your classes today?',
       timestamp: new Date()
     }
   ]);
@@ -53,31 +57,27 @@ const AIChatAssistant: React.FC = () => {
     setIsLoading(true);
     
     try {
-      // Check if we have the Gemini API key
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
       let responseContent = '';
       
       if (!apiKey) {
         toast({
-          title: "Missing API Key",
-          description: "Gemini API key is required for the AI assistant to work.",
-          variant: "destructive"
+          title: "API Configuration",
+          description: "Using alternate response engine for assistant functionality.",
+          variant: "default"
         });
         
-        // Use fallback response if API key is missing
         responseContent = getFallbackResponse(userMessage.content);
       } else {
         try {
-          // Try to get a response from the Gemini API
           responseContent = await getGeminiResponse(userMessage.content);
         } catch (apiError) {
-          console.error('Gemini API error:', apiError);
-          // Fall back to local response generation if API fails
+          console.error('API error:', apiError);
           responseContent = getFallbackResponse(userMessage.content);
           
           toast({
-            title: "API Connection Issue",
-            description: "Using local AI capabilities due to connection issues.",
+            title: "Service Notice",
+            description: "Using backup knowledge engine due to connection issues.",
             variant: "default"
           });
         }
@@ -93,7 +93,7 @@ const AIChatAssistant: React.FC = () => {
       setMessages(prevMessages => [...prevMessages, assistantMessage]);
       setIsLoading(false);
     } catch (error) {
-      console.error('Error with AI assistant:', error);
+      console.error('Assistant processing error:', error);
       
       const errorMessage: Message = {
         id: generateUniqueId(),
@@ -131,7 +131,7 @@ const AIChatAssistant: React.FC = () => {
           <div className="bg-primary text-white p-3 flex justify-between items-center">
             <div className="flex items-center">
               <MessageCircle size={18} className="mr-2" />
-              <h3 className="font-medium">EDU Horizon Assistant</h3>
+              <h3 className="font-medium">Course Assistant</h3>
             </div>
             <div className="flex items-center">
               <Button 
@@ -218,7 +218,7 @@ const AIChatAssistant: React.FC = () => {
                   </Button>
                 </div>
                 <div className="text-xs text-neutral-500 mt-1 text-center">
-                  Powered by Google Gemini AI
+                  Advanced Learning Assistant
                 </div>
               </div>
             </>

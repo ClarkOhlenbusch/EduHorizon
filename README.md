@@ -1,8 +1,8 @@
-# EDU Horizon - Canvas-Inspired Learning Management System
+# Canvas-Inspired Learning Management System
 
-EDU Horizon is a modern, responsive learning management system inspired by Canvas LMS. It provides a comprehensive set of features for both instructors and students to manage courses, assignments, quizzes, and communication.
+A modern, responsive learning management system inspired by Canvas LMS. This platform provides a comprehensive set of features for both instructors and students to manage courses, assignments, quizzes, and communication.
 
-![EDU Horizon Preview](attached_assets/image_1744755960366.png)
+![LMS Preview](attached_assets/image_1744755960366.png)
 
 ## Features
 
@@ -34,11 +34,11 @@ EDU Horizon is a modern, responsive learning management system inspired by Canva
 
 ### Online Demo
 
-Visit the application on Replit: [EDU Horizon Demo](https://eduhorizon.yourusername.repl.co)
+Visit the application on Replit: [LMS Demo](https://lms-demo.repl.co)
 
 ### Installation for Windows
 
-Follow these steps to set up EDU Horizon on a Windows machine:
+Follow these steps to set up the Learning Management System on a Windows machine:
 
 1. **Clone the repository**
    ```
