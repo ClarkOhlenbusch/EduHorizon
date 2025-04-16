@@ -12,7 +12,7 @@ import Assignments from "./pages/Assignments";
 import Quizzes from "./pages/Quizzes";
 import Grades from "./pages/Grades";
 import CourseHome from "./pages/CourseHome";
-import AIChatAssistant from "./components/AIChatAssistant";
+import HelpAssistant from "./components/HelpAssistant";
 import { useToast } from "@/hooks/use-toast";
 import { CourseData } from "@/lib/types";
 
@@ -77,7 +77,7 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       </MainLayout>
-      <AIChatAssistant />
+      <HelpAssistant />
       <Toaster />
     </QueryClientProvider>
   );

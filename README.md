@@ -10,7 +10,7 @@ EDU Horizon is a modern, responsive learning management system inspired by Canva
 - **Course Management**: Easily navigate between courses and their content
 - **Assignment & Quiz System**: Create, submit, and grade assignments and quizzes
 - **Module Organization**: Organize course content into logical modules
-- **AI-Powered Assistant**: Get help with course content using the built-in Gemini-powered assistant
+- **Help Assistant**: Get assistance with course content using the built-in help assistant
 - **Announcements**: Stay updated with course announcements
 - **Grade Tracking**: View and manage grades for all assessments
 
@@ -20,7 +20,6 @@ EDU Horizon is a modern, responsive learning management system inspired by Canva
 - **Backend**: Express.js, Node.js
 - **State Management**: React Query
 - **Routing**: Wouter
-- **AI Integration**: Google Gemini API
 - **Form Handling**: React Hook Form
 - **Validation**: Zod
 
