@@ -34,7 +34,7 @@ A modern, responsive learning management system inspired by Canvas LMS. This pla
 
 ### Online Demo
 
-Visit the application on Replit: [LMS Demo](https://lms-demo.repl.co)
+Visit the application on Replit: https://edu-horizon-clarkohlenbusch.replit.app/
 
 ### Installation for Windows
 
