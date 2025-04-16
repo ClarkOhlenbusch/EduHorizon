@@ -10,8 +10,8 @@
 
 For detailed instructions, read INSTALL_GUIDE.md or README.md
 
-Note: If you have a Gemini API key for the AI assistant feature,
-add it to the .env file: VITE_GEMINI_API_KEY=your_key_here
+Note: The application includes a built-in help assistant
+that provides information about courses and assignments
 
 ===== TROUBLESHOOTING =====
 

@@ -90,10 +90,10 @@ If you prefer to set up manually:
    
    Create a `.env` file in the root directory:
    ```
-   VITE_GEMINI_API_KEY=your_gemini_api_key_here
+   # EDU Horizon Environment Variables
    ```
    
-   Note: If you don't have a Gemini API key, the application will still work, but the AI assistant will use fallback responses.
+   Note: The application doesn't require any environment variables to run.
 
 5. **Start the development server**
    ```
@@ -140,7 +140,7 @@ If you prefer to set up manually:
 
 ## Environment Variables
 
-- `VITE_GEMINI_API_KEY` - Google Gemini API key for AI assistant functionality
+This application doesn't require any specific environment variables to run.
 
 ## Building for Production
 

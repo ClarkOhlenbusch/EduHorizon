@@ -46,7 +46,7 @@ if %ERRORLEVEL% NEQ 0 (
 REM Create .env file if it doesn't exist
 if not exist .env (
     echo Creating .env file...
-    echo VITE_GEMINI_API_KEY= > .env
+    echo # EDU Horizon Environment Variables > .env
     echo .env file created
 ) else (
     echo .env file already exists
@@ -59,8 +59,7 @@ echo.
 echo To start the application, run:
 echo   start-windows.bat
 echo.
-echo If you have a Gemini API key, edit the .env file and add:
-echo   VITE_GEMINI_API_KEY=your_api_key_here
+echo The application is ready to use
 echo.
 echo The application will be available at http://localhost:5000
 echo ================================

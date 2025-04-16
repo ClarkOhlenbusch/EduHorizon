@@ -20,11 +20,10 @@ Thank you for downloading EDU Horizon! This guide will help you get the applicat
    - The application will start and automatically open in your default browser
    - If it doesn't open automatically, navigate to [http://localhost:5000](http://localhost:5000)
 
-4. **Optional: Gemini API Integration**
-   - For AI assistant functionality, you need a Gemini API key from Google
-   - Get your API key from [Google AI Studio](https://aistudio.google.com/)
-   - Edit the `.env` file in the root directory and add: `VITE_GEMINI_API_KEY=your_api_key_here`
-   - Restart the application for the changes to take effect
+4. **Accessing Other Features**
+   - The application includes a help assistant that provides information about courses and assignments
+   - You can customize the application settings through the user profile page
+   - No additional API keys or configurations are required
 
 ### macOS/Linux Users
 
@@ -41,11 +40,10 @@ Thank you for downloading EDU Horizon! This guide will help you get the applicat
    - In Terminal, run: `npm run dev`
    - The application will be available at [http://localhost:5000](http://localhost:5000)
 
-4. **Optional: Gemini API Integration**
-   - For AI assistant functionality, you need a Gemini API key from Google
-   - Get your API key from [Google AI Studio](https://aistudio.google.com/)
-   - Create a `.env` file in the root directory and add: `VITE_GEMINI_API_KEY=your_api_key_here`
-   - Restart the application for the changes to take effect
+4. **Accessing Other Features**
+   - The application includes a help assistant that provides information about courses and assignments
+   - You can customize the application settings through the user profile page
+   - No additional API keys or configurations are required
 
 ## Troubleshooting
 
