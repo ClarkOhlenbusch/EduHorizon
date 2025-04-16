@@ -1,0 +1,26 @@
+===== EDU HORIZON - QUICK START FOR WINDOWS =====
+
+1. First-time setup:
+   - Double-click "setup-windows.bat"
+   - Wait for the installation to complete
+
+2. Start the application:
+   - Double-click "start-windows.bat"
+   - The app will be available at http://localhost:5000
+
+For detailed instructions, read INSTALL_GUIDE.md or README.md
+
+Note: If you have a Gemini API key for the AI assistant feature,
+add it to the .env file: VITE_GEMINI_API_KEY=your_key_here
+
+===== TROUBLESHOOTING =====
+
+If you see errors about "Node.js is not installed":
+- Download and install Node.js from https://nodejs.org/
+- Choose the LTS version
+
+If you see "PORT already in use" errors:
+- Edit server/index.ts and change the port number
+- Restart the application
+
+===== ENJOY! =====

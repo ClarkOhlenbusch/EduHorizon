@@ -38,7 +38,38 @@ Visit the application on Replit: [EDU Horizon Demo](https://eduhorizon.yourusern
 
 ### Installation for Windows
 
-Follow these steps to set up EDU Horizon on a Windows machine:
+EDU Horizon includes Windows batch files to make installation and setup easy. Follow these simple steps:
+
+#### Quick Setup (Recommended)
+
+1. **Clone the repository**
+   ```
+   git clone https://github.com/yourusername/edu-horizon.git
+   cd edu-horizon
+   ```
+
+2. **Run the Windows setup script**
+   ```
+   setup-windows.bat
+   ```
+   This script will:
+   - Check for Node.js and npm
+   - Install all project dependencies
+   - Install cross-env for Windows compatibility
+   - Create a default .env file
+
+3. **Start the application**
+   ```
+   start-windows.bat
+   ```
+   
+4. **Access the application**
+   
+   Open your browser and go to [http://localhost:5000](http://localhost:5000)
+
+#### Manual Setup (Alternative)
+
+If you prefer to set up manually:
 
 1. **Clone the repository**
    ```
@@ -56,21 +87,7 @@ Follow these steps to set up EDU Horizon on a Windows machine:
    npm install cross-env --save-dev
    ```
 
-4. **Modify package.json for Windows compatibility**
-   
-   Edit the `scripts` section in `package.json` to use cross-env:
-   ```json
-   "scripts": {
-     "dev": "cross-env NODE_ENV=development tsx server/index.ts",
-     "dev:windows": "cross-env NODE_ENV=development tsx server/index.ts",
-     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
-     "start": "cross-env NODE_ENV=production node dist/index.js",
-     "check": "tsc",
-     "db:push": "drizzle-kit push"
-   }
-   ```
-
-5. **Create environment variables file**
+4. **Create environment variables file**
    
    Create a `.env` file in the root directory:
    ```
@@ -79,17 +96,12 @@ Follow these steps to set up EDU Horizon on a Windows machine:
    
    Note: If you don't have a Gemini API key, the application will still work, but the AI assistant will use fallback responses.
 
-6. **Start the development server**
-   ```
-   npm run dev
-   ```
-
-   If you still encounter issues, try:
+5. **Start the development server**
    ```
    npx cross-env NODE_ENV=development tsx server/index.ts
    ```
 
-7. **Access the application**
+6. **Access the application**
    
    Open your browser and go to [http://localhost:5000](http://localhost:5000)
 
